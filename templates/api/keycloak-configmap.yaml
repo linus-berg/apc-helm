@@ -6,10 +6,10 @@ metadata:
 data:
   keycloak.json: |
     {
-      "realm": "{{ .Values.keycloak.realm }}",
-      "auth-server-url": "{{ .Values.keycloak.host }}",
+      "realm": "{{ .Values.api.keycloak.realm }}",
+      "auth-server-url": "{{ .Values.api.keycloak.host }}",
       "ssl-required": "external",
-      "resource": "{{ .Values.keycloak.resource }}",
+      "resource": "{{ .Values.api.keycloak.resource }}",
       "public-client": true,
       "verify-token-audience": false,
       "use-resource-role-mappings": true,

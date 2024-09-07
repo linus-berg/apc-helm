@@ -1,0 +1,23 @@
+---
+# ACM Router (routes to the correct protocol collector)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acm-router
+spec:
+  replicas: {{ .Values.router.replicas }} 
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: acm-router
+  template:
+    metadata:
+      labels:
+        app: acm-router
+    spec:
+      containers:
+        - image: ghcr.io/linus-berg/apc/acm/router:{{ .Values.apc.version }} 
+          name: acm-router
+          envFrom:
+            - configMapRef:
+                name: common-env-config

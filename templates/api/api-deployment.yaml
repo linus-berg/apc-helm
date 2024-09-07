@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: apc-api
 spec:
-  replicas: 4
+  replicas: {{ .Values.api.replicas }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:

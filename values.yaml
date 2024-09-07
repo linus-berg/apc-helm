@@ -4,43 +4,59 @@
 
 apc:
   version: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+
+http_proxy: "127.0.0.1"
+
+no_proxy:
+  - google.com
+  - github.com
+
+# API
+api:
+  host: "localhost"
+  loadBalancerIP: 10.10.10.10
+  port: 80
+  replicas: 4
+  keycloak:
+    host: "http://host.minikube.internal"
+    realm: "master"
+    resource: "apc"
+
+# Ingestion
+ingestion:
+  replicas: 4
+
+# GUI
 gui:
   version: "latest"
+  loadBalancerIP: 10.10.10.11
+  port: 80
+  replicas: 4
+
+router:
+  replicas: 8
+
 # General settings
 rabbitmq:
   host: host.minikube.internal
   user: guest
   pass: guest
 
-mongo_str: "mongodb://root:example@host.minikube.internal:27017/"
+mongoStr: "mongodb://root:example@host.minikube.internal:27017/"
+
 redis:
   host: "host.minikube.internal"
+
 otel:
   host: "otel"
 
-# API
-api:
-  host: "localhost"
-# Ingest
-
-# GUI
-
 # ACM specific
 s3:
-  access_key: "minio-apc"
-  secret_key: "minio-apc"
+  accessKey: "minio-apc"
+  secretKey: "minio-apc"
   region: "default"
   endpoint: "http://host.minikube.internal:9000"
   bucket: "apc"
-
-no_proxy:
-  - google.com
-  - github.com
-
-keycloak:
-  host: "http://host.minikube.internal"
-  realm: "master"
-  resource: "apc"
 
 ##
 acms:

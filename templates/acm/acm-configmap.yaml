@@ -4,8 +4,8 @@ metadata:
   name: acm-env-config
 data:
   # Your environment variables go here
-  ACM_S3_ACCESS_KEY: {{ .Values.s3.access_key }}
-  ACM_S3_SECRET_KEY: {{ .Values.s3.secret_key }}
+  ACM_S3_ACCESS_KEY: {{ .Values.s3.accessKey }}
+  ACM_S3_SECRET_KEY: {{ .Values.s3.secretKey }}
   ACM_S3_REGION: {{ .Values.s3.region }}
   ACM_S3_ENDPOINT: {{ .Values.s3.endpoint }}
   ACM_S3_BUCKET: {{ .Values.s3.bucket }}

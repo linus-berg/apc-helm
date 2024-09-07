@@ -4,5 +4,5 @@ metadata:
   name: ingestion-env-config
 data:
   # Your environment variables go here
-  APC_REDIS_HOST: {{ .Values.redis.host }}
-  APC_MONGO_STR: {{ .Values.mongo_str }}
+  APC_REDIS_HOST: {{ .Values.redis.host | quote }}
+  APC_MONGO_STR: "mongodb://{{ .Values.mongo.user }}:{{ .Values.mongo.pass }}@{{ .Values.mongo.host }}:{{ .Values.mongo.port }}/"

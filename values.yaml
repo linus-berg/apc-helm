@@ -10,6 +10,14 @@ http_proxy: "127.0.0.1"
 no_proxy:
   - google.com
   - github.com
+
+hosts:
+  - ip: 127.0.0.1
+    hostnames: 
+      - foo.bar
+      - foo.bar
+      - foo.bar
+
 # CA
 ca_certificates: |
   test
@@ -45,7 +53,11 @@ rabbitmq:
   user: guest
   pass: guest
 
-mongoStr: "mongodb://root:example@host.minikube.internal:27017/"
+mongo:
+  host: host.minikube.internal
+  port: 27017
+  user: root
+  pass: example
 
 redis:
   host: "host.minikube.internal"
@@ -62,7 +74,7 @@ s3:
   bucket: "apc"
 
 ##
-acms:
+collectors:
   - id: "http"
     image: "ghcr.io/linus-berg/apc/acm/http"
     tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
@@ -82,7 +94,7 @@ acms:
     volumes:
       - mountPath: /data
 
-apms:
+processors:
   - id: "npm"
     image: "ghcr.io/linus-berg/apc/apm/npm"
     tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"

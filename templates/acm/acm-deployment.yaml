@@ -1,4 +1,4 @@
-{{- range $.Values.acms }}
+{{- range $.Values.collectors }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -16,6 +16,16 @@ spec:
       labels:
         app: acm-{{ .id }}
     spec:
+      {{- if $.Values.hosts }}
+      {{- range $.Values.hosts }}
+      hostAliases:
+        - ip: {{ .ip | quote }}
+          hostnames:
+          {{- range .hostnames }}
+          - {{ . | quote }}
+          {{- end }}
+      {{- end }}
+      {{- end }}
       {{- if $.Values.ca_certificates }}
       volumes:
         - name: ca-certificates-config-volume

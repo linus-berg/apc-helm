@@ -4,21 +4,21 @@ metadata:
   name: common-env-config
 data:
   # Your environment variables go here
-  APC_RABBIT_MQ_HOST: {{ .Values.rabbitmq.host }}
-  APC_RABBIT_MQ_USER: {{ .Values.rabbitmq.username }}
-  APC_RABBIT_MQ_PASS: {{ .Values.rabbitmq.password }}
+  APC_RABBIT_MQ_HOST: {{ .Values.rabbitmq.host | quote }}
+  APC_RABBIT_MQ_USER: {{ .Values.rabbitmq.username | quote }}
+  APC_RABBIT_MQ_PASS: {{ .Values.rabbitmq.password | quote }}
 {{- if .Values.otel }}
-  APC_OTEL_HOST: {{ .Values.otel.host }}
+  APC_OTEL_HOST: {{ .Values.otel.host | quote }}
 {{- end }}
 {{- if .Values.no_proxy }}
-  NO_PROXY: {{ join "," .Values.no_proxy  }}
-  no_proxy: {{ join "," .Values.no_proxy }}
+  NO_PROXY: {{ (join "," .Values.no_proxy) | quote }}
+  no_proxy: {{ (join "," .Values.no_proxy) | quote }}
 {{- end }}
 {{- if .Values.http_proxy }}
-  HTTP_PROXY: {{ .Values.http_proxy  }}
-  HTTPS_PROXY: {{ .Values.http_proxy  }}
-  http_proxy: {{ .Values.http_proxy  }}
-  https_proxy: {{ .Values.http_proxy  }}
+  HTTP_PROXY: {{ .Values.http_proxy | quote }}
+  HTTPS_PROXY: {{ .Values.http_proxy | quote }}
+  http_proxy: {{ .Values.http_proxy | quote }}
+  https_proxy: {{ .Values.http_proxy | quote }}
 {{- end }}
 {{- if .Values.ca_certificates }}
   ca-certificates.crt: {{ .Values.ca_certificates | quote}}

@@ -5,6 +5,6 @@ metadata:
 data:
   # Your environment variables go here
   APC_LOGS: "/logs/"
-  APC_API_HOST: {{ .Values.api.host }}
-  APC_REDIS_HOST: {{ .Values.redis.host }}
-  APC_MONGO_STR: {{ .Values.mongo_str }}
+  APC_API_HOST: {{ .Values.api.host | quote }}
+  APC_REDIS_HOST: {{ .Values.redis.host | quote }}
+  APC_MONGO_STR: "mongodb://{{ .Values.mongo.user }}:{{ .Values.mongo.pass }}@{{ .Values.mongo.host }}:{{ .Values.mongo.port }}/"

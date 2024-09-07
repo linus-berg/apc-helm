@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 apc:
-  version: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+  version: &apc_version "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
 
 http_proxy: "127.0.0.1"
 
@@ -77,19 +77,19 @@ s3:
 collectors:
   - id: "http"
     image: "ghcr.io/linus-berg/apc/acm/http"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+    tag: *apc_version
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "git"
     image: "ghcr.io/linus-berg/apc/acm/git"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+    tag: *apc_version
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "container"
     image: "ghcr.io/linus-berg/apc/acm/container"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+    tag: *apc_version
     replicas: 1
     volumes:
       - mountPath: /data
@@ -97,8 +97,57 @@ collectors:
 processors:
   - id: "npm"
     image: "ghcr.io/linus-berg/apc/apm/npm"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+    tag: *apc_version
     replicas: 1
       #    env:
       #- name: TEST
       #  value: BLEH
+  - id: nuget
+    image: ghcr.io/linus-berg/apc/apm/nuget
+    tag: *apc_version
+    replicas: 1
+  
+  - id: pypi
+    image: ghcr.io/linus-berg/apc/apm/pypi
+    tag: *apc_version
+    replicas: 1
+    
+  - id: container
+    image: ghcr.io/linus-berg/apc/apm/container
+    tag: *apc_version
+    replicas: 1
+    
+  - id: rancher
+    image: ghcr.io/linus-berg/apc/apm/rancher
+    tag: *apc_version
+    replicas: 1
+    
+  - id: helm
+    image: ghcr.io/linus-berg/apc/apm/helm
+    tag: *apc_version
+    replicas: 1
+    
+  - id: jetbrains
+    image: ghcr.io/linus-berg/apc/apm/jetbrains
+    tag: *apc_version
+    replicas: 1
+    
+  - id: jetbrains-ide
+    image: ghcr.io/linus-berg/apc/apm/jetbrains/ide
+    tag: *apc_version
+    replicas: 1
+    
+  - id: npm
+    image: ghcr.io/linus-berg/apc/apm/npm
+    tag: *apc_version
+    replicas: 3
+  
+  - id: php
+    image: ghcr.io/linus-berg/apc/apm/php
+    tag: *apc_version
+    replicas: 1
+  
+  - id: github-releases
+    image: ghcr.io/linus-berg/apc/apm/github/releases
+    tag: *apc_version
+    replicas: 1

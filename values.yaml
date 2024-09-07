@@ -10,6 +10,9 @@ http_proxy: "127.0.0.1"
 no_proxy:
   - google.com
   - github.com
+# CA
+ca_certificates: |
+  test
 
 # API
 api:

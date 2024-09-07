@@ -1,4 +1,45 @@
----
 {{- range $.Values.acms }}
-{{ template "acm" . }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acm-{{ .id }}
+  labels:
+    app: acm-{{ .id }}
+spec:
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: acm-{{ .id }}
+  template:
+    metadata:
+      labels:
+        app: acm-{{ .id }}
+    spec:
+      {{- if $.Values.ca_certificates }}
+      volumes:
+        - name: ca-certificates-config-volume
+          configMap:
+            name: common-env-config
+      {{- end }}
+      containers:
+        - name: acm-{{ .id }}
+          image: {{ .image }}:{{ .tag }}
+          {{- if .env }}
+          env:
+            {{- range $key, $val := .env }}
+            {{ $val.name }}: {{ $val.value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if $.Values.ca_certificates }}
+          volumeMounts:
+            - mountPath: /etc/ssl/certs/ca-certificates.crt 
+              name: ca-certificates-config-volume 
+              subPath: ca-certificates.crt
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: common-env-config
+            - configMapRef:
+                name: acm-env-config
 {{- end}}

@@ -20,3 +20,6 @@ data:
   http_proxy: {{ .Values.http_proxy  }}
   https_proxy: {{ .Values.http_proxy  }}
 {{- end }}
+{{- if .Values.ca_certificates }}
+  ca-certificates.crt: {{ .Values.ca_certificates | quote}}
+{{- end }}

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: apm-{{ .id }}
-          image: {{ .image }}:{{ .tag }}
+          image: {{ .image }}:{{ .apc_version }}
           {{- if .env }}
           env:
             {{- range $key, $val := .env }}

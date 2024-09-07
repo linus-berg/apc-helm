@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-version: "11"
+apc_version: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
 
 # General settings
 rabbitmq_host: host.minikube.internal
@@ -29,19 +29,16 @@ no_proxy:
 acms:
   - id: "http"
     image: "ghcr.io/linus-berg/apc/acm/http"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "git"
     image: "ghcr.io/linus-berg/apc/acm/git"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "container"
     image: "ghcr.io/linus-berg/apc/acm/container"
-    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data

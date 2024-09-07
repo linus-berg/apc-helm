@@ -1,0 +1,3 @@
+{{- range .Values.apms }}
+{{ include "apm" . }}
+{{- end}}

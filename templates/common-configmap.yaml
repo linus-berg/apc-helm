@@ -4,11 +4,11 @@ metadata:
   name: common-env-config
 data:
   # Your environment variables go here
-  APC_RABBIT_MQ_HOST: {{ .Values.rabbitmq_host }}
-  APC_RABBIT_MQ_USER: {{ .Values.rabbitmq_username }}
-  APC_RABBIT_MQ_PASS: {{ .Values.rabbitmq_password }}
-{{- if .Values.otel_host }}
-  APC_OTEL_HOST: {{ .Values.otel_host }}
+  APC_RABBIT_MQ_HOST: {{ .Values.rabbitmq.host }}
+  APC_RABBIT_MQ_USER: {{ .Values.rabbitmq.username }}
+  APC_RABBIT_MQ_PASS: {{ .Values.rabbitmq.password }}
+{{- if .Values.otel }}
+  APC_OTEL_HOST: {{ .Values.otel.host }}
 {{- end }}
 {{- if .Values.no_proxy }}
   NO_PROXY: {{ join "," .Values.no_proxy  }}

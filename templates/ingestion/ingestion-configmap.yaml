@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingestion-env-config
+data:
+  # Your environment variables go here
+  APC_REDIS_HOST: {{ .Values.redis.host }}
+  APC_MONGO_STR: {{ .Values.mongo_str }}

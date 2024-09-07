@@ -2,43 +2,63 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-apc_version: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
-
+apc:
+  version: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+gui:
+  version: "latest"
 # General settings
-rabbitmq_host: host.minikube.internal
-rabbitmq_user: guest
-rabbitmq_pass: guest
+rabbitmq:
+  host: host.minikube.internal
+  user: guest
+  pass: guest
 
-mongodb_str: "mongodb://root:example@host.minikube.internal:27017/"
-redis_host: "host.minikube.internal"
-otel_host: "otel"
+mongo_str: "mongodb://root:example@host.minikube.internal:27017/"
+redis:
+  host: "host.minikube.internal"
+otel:
+  host: "otel"
 
+# API
+api:
+  host: "localhost"
+# Ingest
+
+# GUI
 
 # ACM specific
-s3_access_key: "minio-apc"
-s3_secret_key: "minio-apc"
-s3_region: "default"
-s3_endpoint: "http://host.minikube.internal:9000"
-s3_bucket: "apc"
+s3:
+  access_key: "minio-apc"
+  secret_key: "minio-apc"
+  region: "default"
+  endpoint: "http://host.minikube.internal:9000"
+  bucket: "apc"
 
 no_proxy:
   - google.com
   - github.com
 
+keycloak:
+  host: "http://host.minikube.internal"
+  realm: "master"
+  resource: "apc"
+
 ##
 acms:
   - id: "http"
     image: "ghcr.io/linus-berg/apc/acm/http"
+    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "git"
     image: "ghcr.io/linus-berg/apc/acm/git"
+    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data
   - id: "container"
     image: "ghcr.io/linus-berg/apc/acm/container"
+    tag: "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
     replicas: 1
     volumes:
       - mountPath: /data

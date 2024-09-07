@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: acm-{{ .id }}
-          image: {{ .image }}:{{ .apc_version }}
+          image: {{ .image }}:{{ .tag }}
           {{- if .env }}
           env:
             {{- range $key, $val := .env }}

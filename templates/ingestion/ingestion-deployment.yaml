@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apc-ingestion
+spec:
+  replicas: 4
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: apc-ingestion
+  template:
+    metadata:
+      labels:
+        app: apc-ingestion
+    spec:
+      containers:
+        - image: ghcr.io/linus-berg/apc/ingestion:{{ .Values.apc.version }} 
+          name: apc-ingestion
+          envFrom:
+            - configMapRef:
+                name: common-env-config
+            - configMapRef:
+                name: ingestion-env-config

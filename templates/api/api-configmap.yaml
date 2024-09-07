@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-env-config
+data:
+  # Your environment variables go here
+  APC_LOGS: "/logs/"
+  APC_API_HOST: {{ .Values.api.host }}
+  APC_REDIS_HOST: {{ .Values.redis.host }}
+  APC_MONGO_STR: {{ .Values.mongo_str }}

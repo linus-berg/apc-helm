@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apc-api
+spec:
+  replicas: 4
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: apc-api
+  template:
+    metadata:
+      labels:
+        app: apc-api
+    spec:
+      volumes:
+        - name: keycloak-config-volume
+          configMap:
+            name: keycloak-config
+      containers:
+        - image: ghcr.io/linus-berg/apc/api:{{ .Values.apc.version }} 
+          name: apc-api
+          volumeMounts:
+            - mountPath: /app/keycloak.json
+              subPath: keycloak.json
+              name: keycloak-config-volume 
+          envFrom:
+            - configMapRef:
+                name: common-env-config
+            - configMapRef:
+                name: api-env-config
+          ports:
+          - containerPort: 80

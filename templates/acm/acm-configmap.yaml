@@ -9,4 +9,5 @@ data:
   ACM_S3_REGION: {{ .Values.s3.region | quote }}
   ACM_S3_ENDPOINT: {{ .Values.s3.endpoint | quote }}
   ACM_S3_BUCKET: {{ .Values.s3.bucket | quote }}
+  APC_ACM_DIR: "/data"
   

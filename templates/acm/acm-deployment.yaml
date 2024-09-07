@@ -35,17 +35,18 @@ spec:
       containers:
         - name: acm-{{ .id }}
           image: {{ .image }}:{{ .tag }}
-          {{- if .env }}
-          env:
-            {{- range $key, $val := .env }}
-            {{ $val.name }}: {{ $val.value | quote }}
-            {{- end }}
-          {{- end }}
           {{- if $.Values.ca_certificates }}
           volumeMounts:
             - mountPath: /etc/ssl/certs/ca-certificates.crt 
               name: ca-certificates-config-volume 
               subPath: ca-certificates.crt
+          {{- end }}
+          {{- if .env }}
+          env:
+            {{- range $key, $val := .env }}
+            - name: {{ $val.name }}
+              value: {{ $val.value | quote }}
+            {{- end }}
           {{- end }}
           envFrom:
             - configMapRef:

@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: common-env-config
 data:
-  # Your environment variables go here
+  LOGGING__LOGLEVEL__DEFAULT: {{ .Values.apc.log.level | quote }}
   APC_RABBIT_MQ_HOST: {{ .Values.rabbitmq.host | quote }}
   APC_RABBIT_MQ_USER: {{ .Values.rabbitmq.username | quote }}
   APC_RABBIT_MQ_PASS: {{ .Values.rabbitmq.password | quote }}

@@ -4,6 +4,8 @@
 
 apc:
   version: &apc_version "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+  log:
+    level: Information
 
 http_proxy: "127.0.0.1"
 
@@ -99,9 +101,9 @@ processors:
     image: "ghcr.io/linus-berg/apc/apm/npm"
     tag: *apc_version
     replicas: 1
-      #    env:
-      #- name: TEST
-      #  value: BLEH
+    env:
+      - name: TEST
+        value: BLEH
   - id: nuget
     image: ghcr.io/linus-berg/apc/apm/nuget
     tag: *apc_version
@@ -126,6 +128,11 @@ processors:
     image: ghcr.io/linus-berg/apc/apm/helm
     tag: *apc_version
     replicas: 1
+    env:
+      - name: ARTIFACTHUB_API_KEY_ID
+        value: xxxx
+      - name: ARTIFACTHUB_API_KEY_SECRET
+        value: xxxx
     
   - id: jetbrains
     image: ghcr.io/linus-berg/apc/apm/jetbrains
@@ -136,11 +143,6 @@ processors:
     image: ghcr.io/linus-berg/apc/apm/jetbrains/ide
     tag: *apc_version
     replicas: 1
-    
-  - id: npm
-    image: ghcr.io/linus-berg/apc/apm/npm
-    tag: *apc_version
-    replicas: 3
   
   - id: php
     image: ghcr.io/linus-berg/apc/apm/php

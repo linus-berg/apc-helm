@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: apc-ingestion
 spec:
-  replicas: {{ .Values.ingestion.replicas }}
+  replicas: {{ required ".Values.ingestion.replicas must be set" .Values.ingestion.replicas }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -25,7 +25,7 @@ spec:
       {{- end }}
       {{- end }}
       containers:
-        - image: ghcr.io/linus-berg/apc/ingestion:{{ .Values.apc.version }} 
+        - image: ghcr.io/linus-berg/apc/ingestion:{{ required ".Values.apc.version version must be set" .Values.apc.version }} 
           name: apc-ingestion
           envFrom:
             - configMapRef:

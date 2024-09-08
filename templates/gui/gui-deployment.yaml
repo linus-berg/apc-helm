@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: apc-gui
 spec:
-  replicas: {{ .Values.gui.replicas }}
+  replicas: {{ required ".Values.gui.replicas must be set" .Values.gui.replicas }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
         app: apc-gui
     spec:
       containers:
-        - image: ghcr.io/linus-berg/apc/gui:{{ .Values.gui.version }} 
+        - image: ghcr.io/linus-berg/apc/gui:{{ required ".Values.gui.version must be set" .Values.gui.version }} 
           name: apc-gui
           ports:
           - containerPort: 80

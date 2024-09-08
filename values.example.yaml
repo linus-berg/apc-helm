@@ -3,26 +3,24 @@
 # Declare variables to be passed into your templates.
 
 apc:
-  version: &apc_version "60fa2b8be5bc5e3acc29cec65e12054d7ec5650f"
+  version: &apc_version "fe27ea40be7f5e6d4d358ffbd7215681b5b7cd2c"
   log:
     level: Information
 
-http_proxy: "127.0.0.1"
+#http_proxy: "127.0.0.1"
 
-no_proxy:
-  - google.com
-  - github.com
+#no_proxy:
+  #- google.com
+  #- github.com
 
 hosts:
-  - ip: 127.0.0.1
+  - ip: 127.1.1.1
     hostnames: 
-      - foo.bar
-      - foo.bar
       - foo.bar
 
 # CA
-ca_certificates: |
-  test
+#ca_certificates: |
+#  test
 
 # API
 api:
@@ -64,15 +62,15 @@ mongo:
 redis:
   host: "host.minikube.internal"
 
-otel:
-  host: "otel"
+#otel:
+  #host: "otel"
 
 # ACM specific
 s3:
   accessKey: "minio-apc"
   secretKey: "minio-apc"
-  region: "default"
-  endpoint: "http://host.minikube.internal:9000"
+  region: ""
+  endpoint: "host.minikube.internal:9000"
   bucket: "apc"
 
 ##

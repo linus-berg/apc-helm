@@ -25,7 +25,7 @@ hosts:
 # API
 api:
   host: "localhost"
-  loadBalancerIP: 10.10.10.10
+  loadBalancerIP: 192.168.99.10
   port: 80
   replicas: 4
   keycloak:
@@ -39,8 +39,8 @@ ingestion:
 
 # GUI
 gui:
-  version: "latest"
-  loadBalancerIP: 10.10.10.11
+  version: "c0cdfeacab02641551e9bd0758427b7fb4578424"
+  loadBalancerIP: 192.168.99.11
   port: 80
   replicas: 4
 

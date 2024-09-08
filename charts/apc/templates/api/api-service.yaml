@@ -9,6 +9,6 @@ spec:
       port: {{ .Values.api.port }}
       targetPort: 80
   type: LoadBalancer
-  loadBalancerIP: {{ .Values.api.loadbalancerIP }}
+  loadBalancerIP: {{ .Values.api.loadBalancerIP }}
   selector:
     app: apc-api

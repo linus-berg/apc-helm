@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: apc-gui
+      annotations:
+        apc/version: {{ .Values.gui.version }}
     spec:
       containers:
         - image: ghcr.io/linus-berg/apc/gui:{{ required ".Values.gui.version must be set" .Values.gui.version }} 

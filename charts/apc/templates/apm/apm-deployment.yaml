@@ -15,6 +15,9 @@ spec:
     metadata:
       labels:
         app: apm-{{ .id }}
+      annotations:
+        apc/version: {{ $.Values.apc.version }}
+        checksum/config: {{ include (print $.Template.BasePath "/common-configmap.yaml") $ | sha256sum }}
     spec:
       {{- if $.Values.hosts }}
       {{- range $.Values.hosts }}

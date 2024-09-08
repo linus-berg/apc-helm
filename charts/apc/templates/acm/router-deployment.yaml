@@ -14,6 +14,9 @@ spec:
     metadata:
       labels:
         app: acm-router
+      annotations:
+        apc/version: {{ .Values.apc.version }}
+        checksum/config: {{ include (print $.Template.BasePath "/common-configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - image: ghcr.io/linus-berg/apc/acm/router:{{ .Values.apc.version }} 

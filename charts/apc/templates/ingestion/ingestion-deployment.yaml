@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: apc-ingestion
+      annotations:
+        apc/version: {{ .Values.apc.version }}
+        checksum/config: {{ include (print $.Template.BasePath "/common-configmap.yaml") . | sha256sum }}
+        checksum/ingestion-config: {{ include (print $.Template.BasePath "/ingestion/ingestion-configmap.yaml") . | sha256sum }}
     spec:
       {{- if $.Values.hosts }}
       {{- range $.Values.hosts }}

@@ -3,6 +3,16 @@ entries:
   apc:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-09-09T17:35:07.553870437Z"
+    description: A Helm chart for running the APC
+    digest: 5ca730e825f32a55f091a51c2b38151a9ebeb29ed9723314ec316c7e41561ce3
+    name: apc
+    type: application
+    urls:
+    - https://github.com/linus-berg/helm-charts/releases/download/apc-0.1.4/apc-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-09-08T17:31:01.860636632Z"
     description: A Helm chart for running the APC
     digest: c0b0adfe7f26ae938f0c79732d5c6290f95c0fd39b5a8f6bce011c19f4d2c9a2
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/linus-berg/helm-charts/releases/download/apc-0.1.0/apc-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-08T17:31:01.860672078Z"
+generated: "2024-09-09T17:35:07.55389848Z"

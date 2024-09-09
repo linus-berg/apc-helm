@@ -20,19 +20,24 @@ spec:
         checksum/keycloak-config: {{ include (print $.Template.BasePath "/api/keycloak-configmap.yaml") . | sha256sum }}
     spec:
       {{- if $.Values.hosts }}
-      {{- range $.Values.hosts }}
       hostAliases:
+        {{- range $.Values.hosts }}
         - ip: {{ .ip | quote }}
           hostnames:
           {{- range .hostnames }}
           - {{ . | quote }}
           {{- end }}
-      {{- end }}
+        {{- end }}
       {{- end }}
       volumes:
         - name: keycloak-config-volume
           configMap:
             name: keycloak-config
+      {{- if $.Values.ca_certificates }}
+        - name: ca-certificates-config-volume
+          configMap:
+            name: common-env-config
+      {{- end }}
       containers:
         - image: ghcr.io/linus-berg/apc/api:{{ .Values.apc.version }} 
           name: apc-api
@@ -40,6 +45,11 @@ spec:
             - mountPath: /app/keycloak.json
               subPath: keycloak.json
               name: keycloak-config-volume 
+          {{- if $.Values.ca_certificates }}
+            - mountPath: /etc/ssl/certs/ca-certificates.crt
+              name: ca-certificates-config-volume
+              subPath: ca-certificates.crt
+          {{- end }}
           envFrom:
             - configMapRef:
                 name: common-env-config

@@ -17,10 +17,13 @@ hosts:
   - ip: 127.1.1.1
     hostnames: 
       - foo.bar
+  - ip: 127.1.1.2
+    hostnames: 
+      - foo.foo
 
 # CA
-#ca_certificates: |
-#  test
+ca_certificates: |
+  test
 
 # API
 api:

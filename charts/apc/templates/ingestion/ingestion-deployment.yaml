@@ -19,14 +19,14 @@ spec:
         checksum/ingestion-config: {{ include (print $.Template.BasePath "/ingestion/ingestion-configmap.yaml") . | sha256sum }}
     spec:
       {{- if $.Values.hosts }}
-      {{- range $.Values.hosts }}
       hostAliases:
+        {{- range $.Values.hosts }}
         - ip: {{ .ip | quote }}
           hostnames:
           {{- range .hostnames }}
           - {{ . | quote }}
           {{- end }}
-      {{- end }}
+        {{- end }}
       {{- end }}
       containers:
         - image: ghcr.io/linus-berg/apc/ingestion:{{ required ".Values.apc.version version must be set" .Values.apc.version }} 

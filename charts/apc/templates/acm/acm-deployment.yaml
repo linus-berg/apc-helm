@@ -21,14 +21,14 @@ spec:
         checksum/acm-config: {{ include (print $.Template.BasePath "/acm/acm-configmap.yaml") $ | sha256sum }}
     spec:
       {{- if $.Values.hosts }}
-      {{- range $.Values.hosts }}
       hostAliases:
+        {{- range $.Values.hosts }}
         - ip: {{ .ip | quote }}
           hostnames:
           {{- range .hostnames }}
           - {{ . | quote }}
           {{- end }}
-      {{- end }}
+        {{- end }}
       {{- end }}
       {{- if $.Values.ca_certificates }}
       volumes:

@@ -18,6 +18,16 @@ spec:
         apc/version: {{ .Values.apc.version }}
         checksum/config: {{ include (print $.Template.BasePath "/common-configmap.yaml") . | sha256sum }}
     spec:
+      {{- if $.Values.hosts }}
+      hostAliases:
+        {{- range $.Values.hosts }}
+        - ip: {{ .ip | quote }}
+          hostnames:
+          {{- range .hostnames }}
+            - {{ . | quote }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
       containers:
         - image: ghcr.io/linus-berg/apc/acm/router:{{ .Values.apc.version }} 
           name: acm-router

@@ -19,13 +19,19 @@ spec:
         apc/version: {{ $.Values.apc.version }}
         checksum/config: {{ include (print $.Template.BasePath "/common-configmap.yaml") $ | sha256sum }}
     spec:
+      {{- if .imagePullSecrets }}
+      imagePullSecrets:
+        {{- range .imagePullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
       {{- if $.Values.hosts }}
       hostAliases:
         {{- range $.Values.hosts }}
         - ip: {{ .ip | quote }}
           hostnames:
           {{- range .hostnames }}
-          - {{ . | quote }}
+            - {{ . | quote }}
           {{- end }}
         {{- end }}
       {{- end }}

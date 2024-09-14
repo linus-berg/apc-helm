@@ -25,7 +25,7 @@ spec:
         - ip: {{ .ip | quote }}
           hostnames:
           {{- range .hostnames }}
-          - {{ . | quote }}
+            - {{ . | quote }}
           {{- end }}
         {{- end }}
       {{- end }}

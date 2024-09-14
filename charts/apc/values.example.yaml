@@ -102,6 +102,8 @@ processors:
     image: "ghcr.io/linus-berg/apc/apm/npm"
     tag: *apc_version
     replicas: 1
+    imagePullSecrets: 
+      - test
     env:
       - name: TEST
         value: BLEH
